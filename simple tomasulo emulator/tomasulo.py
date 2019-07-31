@@ -104,10 +104,6 @@ class SimpleTomasuloEmulator(object):
     def run(self):
         cycle = 1
         while(len(self.codeSeq)>0 or len(self.reservationStations)>0):
-            if len(self.codeSeq)>0:
-                fetchCode = self.codeSeq.pop(0)
-                self.idealCalculate(fetchCode)
-                self.issue(self.decode(fetchCode))
             for name, entry in self.reservationStations.items():
                 if entry.qj=="0" and entry.qk=="0":
                     if entry.opDelay==0:
@@ -116,6 +112,11 @@ class SimpleTomasuloEmulator(object):
                         entry.finished = True
                     else:
                         entry.opDelay = entry.opDelay - 1
+            if len(self.codeSeq)>0:
+                fetchCode = self.codeSeq.pop(0)
+                self.idealCalculate(fetchCode)
+                self.issue(self.decode(fetchCode))
+
             print(("Cycle: " + str(cycle)).ljust(80) + "\n")
             print('='*80 + '\n')
             print("Name".ljust(10) + "Finished".ljust(10) + "Op".ljust(10) + "Vj".ljust(10) + "Vk".ljust(10) + "Qj".ljust(10) + "Qk".ljust(10) + "Op Delay".ljust(10) + '\n')
