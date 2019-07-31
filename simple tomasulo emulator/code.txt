@@ -1,0 +1,7 @@
+mul r2,r3,r4
+add r1,r2,r3
+add r3,r1,r1
+mul r4,r5,r6
+add r6,r5,r5
+mul r6,r5,r5
+add r6,r4,r4
